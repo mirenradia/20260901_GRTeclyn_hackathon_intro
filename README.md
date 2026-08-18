@@ -1,7 +1,9 @@
-# Quarto Presentation Template
+# GRTeclyn Hackathon introductory slides
+## Tuesday 01 September 2026
 
-This repository template is what Miren uses for creating presentations with
-Quarto.
+This repository contains the source code for the introductory slides used at the
+GRTeclyn hackathon held in DAMTP, University of Cambridge from Tuesday 01 -
+Thursday 03 September 2026.
 
 ## Quarto
 
@@ -21,7 +23,9 @@ It should generate a `slides.html` file which you can open with a web browser.
 
 ### GitHub Pages
 
-The slides are published to the GitHub pages site associated to this repository.
+The slides are published to the [GitHub pages
+site](https://mirenradia.github.io/20260901_GRTeclyn_hackathon_intro/)
+associated to this repository.
 
 ## License
 
