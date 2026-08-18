@@ -1,7 +1,7 @@
 ---
-title: "Template Presentation"
-subtitle: "Event name"
-date: "20XX-YY-ZZ"
+title: "Welcome to our first GRTeclyn hackathon!"
+subtitle: "Some useful information before we get going."
+date: "2026-09-01"
 date-format: "dddd DD MMMM YYYY"
 from: markdown+emoji
 format:
@@ -9,23 +9,266 @@ format:
     embed-resources: false
     transition: slide
     sc-sb-title: true
+    logo: "media/grteclyn-logo.png"
     auto-play-media: true
     menu:
       openButton: false
+    code-line-numbers: false
 
 filters:
  - reveal-header
 
 authors:
+ - name: Katy Clough
+   affiliations:
+     - name: Queen Mary University of London
+ - name: Juliana Kwan
+   affiliations:
+     - name: University of Cambridge
  - name: Miren Radia
-   role: Research Software Engineer
    affiliations:
      - name: University of Cambridge
 
 ---
 
-# Section 1
+# Introduction
 
-## First slide title
+## GRTeclyn {.smaller}
 
-* A bullet point
+* GRTeclyn has been in development for several years now and is now at a
+  point where it can be used in production :tada:
+* Documentation: [https://grtlcollaboration.github.io/GRTeclyn](https://grtlcollaboration.github.io/GRTeclyn)
+
+:::: {.columns}
+
+::: {.column width="50%"}
+### Things that work
+* Adaptive mesh refinement
+* NVIDIA/AMD/Intel GPU offloading
+* CCZ4 evolution + Moving puncture gauge
+* Binary black hole example with/without TwoPunctures initial data
+* Puncture tracking
+* Scalar field (Oscillaton) example
+* Derived quantities (e.g. $\Psi_4$, Constraint violations, EM Tensor)
+* Particle-based AMR interpolator
+* GW Extraction
+:::
+
+::: {.column width="50%"}
+### In development/planned/this hackathon
+* Reductions (e.g. $L^2$ norms of constraints)
+* Compatibility with GRTresna (IC solver)
+* Apparent Horizon finder
+* Modified Cartoon formalism support
+* ADM mass and momenta computation
+* Other examples
+:::
+
+::::
+
+## Purpose and aims
+
+* This hackathon is intended to be informal and collaborative.
+* There is no pressure or expectation to produce a completely polished new
+  feature for the GRTeclyn by the end.
+* Our main aim is to have more people using and familiar with GRTeclyn.
+* We'd also like to hear any feedback you have on the code and documentation.
+* Our secondary goal is to kick-start the process of moving users from GRChombo
+  to GRTeclyn.
+
+## Projects {.smaller}
+
+* See [https://tinyurl.com/grteclyn-hackathon-projects](https://tinyurl.com/grteclyn-hackathon-projects) for Katy's spreadsheet.
+
+:::: {.columns}
+
+::: {.column width="50%"}
+### Easier (level 1 or 2)
+* Review documentation and suggest improvements.
+* Test the BinaryBH or Scalar Field examples.
+* Add stoic quotes on good or bad exit.
+* Port your own diagnostic or example to GRTeclyn.
+* Port the KerrBH example from GRChombo to GRTeclyn.
+  ([#19](https://github.com/GRTLCollaboration/GRTeclyn/issues/19)).
+* Make a tool to convert GRChombo HDF5 checkpoints to GRTeclyn Checkpoints
+  ([#199](https://github.com/GRTLCollaboration/GRTeclyn/issues/199)).
+* Port the Hamiltonian constraint tagging criterion from GRChombo to GRTeclyn
+  ([#104](https://github.com/GRTLCollaboration/GRTeclyn/issues/104)).
+:::
+
+::: {.column width="50%"}
+### Harder (level 3 or higher)
+* Port the ADM mass and momenta diagnostics from GRChombo to GRTeclyn
+  ([#205](https://github.com/GRTLCollaboration/GRTeclyn/issues/205)).
+* Add support for reductions over the whole AMR hierarchy
+  ([#73](https://github.com/GRTLCollaboration/GRTeclyn/issues/73)).
+* Refactor the boundary condition code
+  ([#62](https://github.com/GRTLCollaboration/GRTeclyn/issues/62)).
+* Port the Cartoon formalism from GRChombo to GRTeclyn
+  ([#200](https://github.com/GRTLCollaboration/GRTeclyn/issues/200)).
+* Port GRFolres (modified gravity) from GRChombo to GRTeclyn.
+* Port GRDZhadzha (fixed background) from GRChombo to GRTeclyn.
+* Add perfect fluid matter support.
+* Work on the Apparent Horizon finder
+  ([#161](https://github.com/GRTLCollaboration/GRTeclyn/issues/161)).
+:::
+
+::::
+
+# Running GRTeclyn on Zenith
+
+## Logging on with a training account {.smaller}
+
+* If you didn't opt out, you should receive an email with your training account
+  username and a **one-time** link to collect the password.
+* Please store the password somewhere safe (e.g a password manager) or write it
+  down and keep it safe.
+* Set up MFA following
+  [https://docs.hpc.cam.ac.uk/hpc/user-guide/mfa.html](https://docs.hpc.cam.ac.uk/hpc/user-guide/mfa.html):
+  1. Make sure you are ready with your phone and a TOTP (Time-based One-Time
+     Password) app as this will **only work once**.
+  1. SSH to the MFA setup node:
+     ```bash
+     ssh <username>@multi.hpc.cam.ac.uk
+     ```
+  1. Enter your password if requested.
+  1. Scan the QR code with your TOTP add and enter the code from your app to
+     verify.
+* You should now be able to SSH to the following login nodes using your training
+  account and TOTP:
+  ```bash
+  ssh <username>@login-dawn.hpc.cam.ac.uk
+  ```
+  Note that these login nodes have a different CPU microarchitecture to the
+  Zenith compute nodes.
+* Usual courtesies on the login nodes apply e.g. don't run long jobs.
+
+## Building the BinaryBH example for Zenith {.smaller}
+
+1. Clone the AMReX repository into e.g. your home directory:
+   ```bash
+   git clone https://github.com/AMReX-Codes/amrex.git
+   ```
+1. Clone the GRTeclyn repository under the same parent directory e.g. also in your home directory:
+   ```bash
+   git clone https://github.com/GRTLCollaboration/GRTeclyn.git
+   ```
+1. Load the following modules:
+   ```bash
+   module purge
+   module load rhel9/mi355x/base
+   module load openmpi/5.0.10/llvm-amdgpu-7.14/pu3qyle7 # maybe tab-complete this one
+   ```
+1. Create a file at `~/amrex/Tools/GNUMake/Make.local-pre` with the following contents:
+   ```make
+   USE_HIP = TRUE
+   AMREX_AMD_ARCH = gfx950
+   ```
+1. Navigate to the BinaryBH example and run `make`:
+   ```bash
+   cd ~/GRTeclyn/Examples/BinaryBH
+   make -j 4
+   ```
+
+## Submitting jobs {.smaller}
+
+* You can submit jobs using a SLURM submission script. An example is provided in
+  [the GRTeclyn
+  documentation](https://grtlcollaboration.github.io/GRTeclyn/example_configs/#zenith).
+* You can also start an interactive shell on the login nodes:
+  ```bash
+  module purge
+  module load rhel9/mi355x/base
+  sint -N1 -n1 -c16 --gres=gpu:1 -p mi355x --qos=INTR --time=00:10:00 --account=ZEA-P004-ZENITH-GPU --reservation=<reservation name>
+  ```
+* You will need to ensure you specify:
+  * `--partition=mi355x` for the Zenith GPU partition
+  * `--account=ZEA-P004-ZENITH-GPU` for our GRTeclyn allocation
+  * `--reservation=<reservation name>` for the hackathon reservation
+* We only have 2 nodes (16 GPUs) reserved for the hackathon so please be
+  considerate:
+  * Build on the login node and only submit jobs to run on the compute nodes.
+  * Keep test jobs short (≤ 10 minutes) and small (1 GPU). Each GPU has 288GB
+    of VRAM so can fit a production-sized Binary BH simulation.
+  * Only submit 1 job at a time.
+  * Please ask if you need more time or resources for a particular job.
+
+# Contributing to GRTeclyn
+
+## Repository access
+
+* For security reasons, write access to the GRTeclyn repository is restricted.
+* If you would like to contribute some code, please fork the repository and
+  submit a pull request from the fork.
+* If you think you will become a regular contributor, we can provide you with
+  write access to the repository so please ask.
+* You can also fork the repository if you intend to work on your own
+  examples/capabilities that you don't want to add to the main repository.
+* You can add multiple remote repositories to your local clone using the
+  command:
+  ```bash
+  git remote add <remote name> <remote URL>
+  ```
+
+## Step-by-step guide {.smaller}
+
+1. Start on the `develop` branch that is up-to-date with the main repository.
+1. Create a new branch for your new contribution:
+   ```bash
+   git switch -c enhancement/my_new_contribution
+   ```
+1. Work on this new branch and commit your changes regularly.
+   * Make sure the tests pass and you can run an example with your change (if
+   applicable).
+   * Please update the documentation in the `docs` folder accordingly.
+1. Push your branch to your forked repository or the main repository if you have 
+   write access:
+   ```bash
+   git push -u <remote name> enhancement/my_new_contribution
+   ```
+1. Open a pull request from your branch to the `develop` branch of the main
+   repository with a clear description of your changes.
+
+## Code conventions {.smaller}
+
+* More details in the docs:
+  [https://grtlcollaboration.github.io/GRTeclyn/coding_conventions/](https://grtlcollaboration.github.io/GRTeclyn/coding_conventions/)
+* Please ensure your code is formatted with `clang-format`. You can make sure
+  this is done when you commit by setting up pre-commit:
+  ```bash
+  python3 -m pip install --user pre-commit
+  cd /path/to/GRTeclyn
+  pre-commit install
+  ```
+* Variable names should be underscored lower case e.g.  `my_new_variable`
+* Function names should start with a verb and be underscored lower case
+  e.g. `compute_new_variable()`.
+* Class names should be CamelCase e.g. `MyNewClass`. and member variables should
+  be prefixed with `m_` e.g. `m_my_member_variable`.
+* We generally avoid abbreviations in variable and function names with a few
+  exceptions which are listed in the documentation.
+* Follow this [style guide](https://cbea.ms/git-commit/) for commit messages:
+  * Imperative mood in subject line ideally < 50 chars. Capital letter at start,
+    no full stop at the end.
+  * Body containing what and why you have done, wrapped at 72 chars per line.
+* Rebase your commits to avoid lots of tiny ones.
+
+# Logistics
+
+## Schedule
+
+| Time              | Tue 01 Sep                | Wed 02 Sep      | Thu 03 Sep              |
+|-------------------|---------------------------|-----------------|-------------------------|
+| 09:00 - 11:00     | —                         | Hacking         | Hacking                 |
+| 11:00 - 11:30     | Welcome and introduction  | Coffee break    | Coffee break            |
+| 11:30 - 12:30     | Hacking                   | Hacking         | Round-up and feedback   |
+| 12:30 - 13:30     | Lunch                     | Lunch           | Lunch and goodbyes      |
+| 13:30 - 15:00     | Hacking                   | Hacking         | —                       |
+| 15:00 - 15:30     | Coffee break              | Coffee break    | —                       |
+| 15:30 - 17:00     | Hacking                   | Hacking         | —                       |
+
+* Lunch will take place in the Potter Room in Pavilion B.
+* Coffee breaks will take place outside this room.
+* Coffee breaks are optional if you are in full flow and don't want to stop.
+
+# Happy hacking!
