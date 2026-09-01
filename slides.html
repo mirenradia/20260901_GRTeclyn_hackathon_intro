@@ -10,7 +10,7 @@
 <script src="slides_files/libs/quarto-contrib/reveal-header-1.0.0/add_header.js" defer="true"></script>
 <link href="slides_files/libs/quarto-contrib/reveal-header-1.0.0/add_header.css" rel="stylesheet">
 <script src="slides_files/libs/quarto-contrib/sc-sb-title-1.0.0/sc_sb_title.js" defer="true"></script>
-<link href="slides_files/libs/quarto-contrib/grid-no-htext-1.0.0/grid_no_htext.css" rel="stylesheet"><meta charset="utf-8">
+<link href="slides_files/libs/quarto-contrib/grid-htext-1.0.0/grid_htext.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.10.18">
 
   <title>Welcome to our first GRTeclyn hackathon!</title>
@@ -243,7 +243,7 @@ Miren Radia
 <section id="grteclyn" class="slide level2 smaller">
 <h2>GRTeclyn</h2>
 <ul>
-<li>GRTeclyn has been in development for several years now and is now at a point where it can be used in production <span class="emoji" data-emoji="tada">🎉</span></li>
+<li><a href="https://github.com/GRTLCollaboration/GRTeclyn">GRTeclyn</a> has been in development for several years now and is now at a point where it can be used in production <span class="emoji" data-emoji="tada">🎉</span></li>
 <li>Documentation: <a href="https://grtlcollaboration.github.io/GRTeclyn">https://grtlcollaboration.github.io/GRTeclyn</a></li>
 </ul>
 <div class="columns">
@@ -318,21 +318,14 @@ Miren Radia
 <h1>Running GRTeclyn on Zenith</h1>
 
 </section>
-<section id="logging-on-with-a-training-account" class="slide level2 smaller">
+<section id="logging-on-with-a-training-account" class="slide level2">
 <h2>Logging on with a training account</h2>
 <ul>
 <li><p>If you didn’t opt out, you should receive an email with your training account username and a <strong>one-time</strong> link to collect the password.</p></li>
 <li><p>Please store the password somewhere safe (e.g a password manager) or write it down and keep it safe.</p></li>
-<li><p>Set up MFA following <a href="https://docs.hpc.cam.ac.uk/hpc/user-guide/mfa.html">https://docs.hpc.cam.ac.uk/hpc/user-guide/mfa.html</a>:</p>
-<ol type="1">
-<li><p>Make sure you are ready with your phone and a TOTP (Time-based One-Time Password) app as this will <strong>only work once</strong>.</p></li>
-<li><p>SSH to the MFA setup node:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="op">&lt;</span>username<span class="op">&gt;</span>@multi.hpc.cam.ac.uk</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><p>Enter your password if requested.</p></li>
-<li><p>Scan the QR code with your TOTP add and enter the code from your app to verify.</p></li>
-</ol></li>
-<li><p>You should now be able to SSH to the following login nodes using your training account and TOTP:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="op">&lt;</span>username<span class="op">&gt;</span>@login-dawn.hpc.cam.ac.uk</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<li><p>MFA has been disabled on your training account so you should be able to log in with just your username and password.</p></li>
+<li><p>SSH to the following login node with your training account username:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> zXXX@login-dawn.hpc.cam.ac.uk</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Note that these login nodes have a different CPU microarchitecture to the Zenith compute nodes.</p></li>
 <li><p>Usual courtesies on the login nodes apply e.g.&nbsp;don’t run long jobs.</p></li>
 </ul>
@@ -341,19 +334,19 @@ Miren Radia
 <h2>Building the BinaryBH example for Zenith</h2>
 <ol type="1">
 <li><p>Clone the AMReX repository into e.g.&nbsp;your home directory:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/AMReX-Codes/amrex.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/AMReX-Codes/amrex.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 <li><p>Clone the GRTeclyn repository under the same parent directory e.g.&nbsp;also in your home directory:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/GRTLCollaboration/GRTeclyn.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/GRTLCollaboration/GRTeclyn.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 <li><p>Load the following modules:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> purge</span>
-<span id="cb5-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load rhel9/mi355x/base</span>
-<span id="cb5-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load openmpi/5.0.10/llvm-amdgpu-7.14/pu3qyle7 <span class="co"># maybe tab-complete this one</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> purge</span>
+<span id="cb4-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load rhel9/mi355x/base</span>
+<span id="cb4-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load openmpi/5.0.10/llvm-amdgpu-7.14/pu3qyle7 <span class="co"># maybe tab-complete this one</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 <li><p>Create a file at <code>~/amrex/Tools/GNUMake/Make.local-pre</code> with the following contents:</p>
-<pre class="make"><code>USE_HIP = TRUE
-AMREX_AMD_ARCH = gfx950</code></pre></li>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode makefile code-with-copy"><code class="sourceCode makefile"><span id="cb5-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="dt">USE_HIP</span> <span class="ch">=</span><span class="st"> TRUE</span></span>
+<span id="cb5-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="dt">AMREX_AMD_ARCH</span> <span class="ch">=</span><span class="st"> gfx950</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 <li><p>Navigate to the BinaryBH example and run <code>make</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/GRTeclyn/Examples/BinaryBH</span>
-<span id="cb7-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> <span class="at">-j</span> 4</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/GRTeclyn/Examples/BinaryBH</span>
+<span id="cb6-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> <span class="at">-j</span> 4</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 </ol>
 </section>
 <section id="submitting-jobs" class="slide level2 smaller">
@@ -361,15 +354,15 @@ AMREX_AMD_ARCH = gfx950</code></pre></li>
 <ul>
 <li><p>You can submit jobs using a SLURM submission script. An example is provided in <a href="https://grtlcollaboration.github.io/GRTeclyn/example_configs/#zenith">the GRTeclyn documentation</a>.</p></li>
 <li><p>You can also start an interactive shell on the login nodes:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> purge</span>
-<span id="cb8-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load rhel9/mi355x/base</span>
-<span id="cb8-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ex">sint</span> <span class="at">-N1</span> <span class="at">-n1</span> <span class="at">-c16</span> <span class="at">--gres</span><span class="op">=</span>gpu:1 <span class="at">-p</span> mi355x <span class="at">--qos</span><span class="op">=</span>INTR <span class="at">--time</span><span class="op">=</span>00:10:00 <span class="at">--account</span><span class="op">=</span>ZEA-P004-ZENITH-GPU <span class="at">--reservation</span><span class="op">=&lt;</span>reservation name<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> purge</span>
+<span id="cb7-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load rhel9/mi355x/base</span>
+<span id="cb7-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ex">sint</span> <span class="at">-N1</span> <span class="at">-n1</span> <span class="at">-c16</span> <span class="at">--gres</span><span class="op">=</span>gpu:1 <span class="at">-p</span> mi355x <span class="at">--qos</span><span class="op">=</span>INTR <span class="at">--time</span><span class="op">=</span>00:10:00 <span class="at">--account</span><span class="op">=</span>ZEA-P004-ZENITH-GPU</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 <li><p>You will need to ensure you specify:</p>
 <ul>
 <li><code>--partition=mi355x</code> for the Zenith GPU partition</li>
 <li><code>--account=ZEA-P004-ZENITH-GPU</code> for our GRTeclyn allocation</li>
-<li><code>--reservation=&lt;reservation name&gt;</code> for the hackathon reservation</li>
 </ul></li>
+<li><p>The SLURM reservation is magnetic so you shouldn’t need to specify it.</p></li>
 <li><p>We only have 2 nodes (16 GPUs) reserved for the hackathon so please be considerate:</p>
 <ul>
 <li>Build on the login node and only submit jobs to run on the compute nodes.</li>
@@ -378,6 +371,10 @@ AMREX_AMD_ARCH = gfx950</code></pre></li>
 <li>Please ask if you need more time or resources for a particular job.</li>
 </ul></li>
 </ul>
+</section>
+<section id="julianas-video-walkthrough" class="slide level2">
+<h2>Juliana’s video walkthrough</h2>
+<iframe data-external="1" src="https://www.youtube.com/embed/1XmTlvjiWAw" width="100%" height="85%" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
 </section></section>
 <section>
 <section id="contributing-to-grteclyn" class="title-slide slide level1 center">
@@ -392,23 +389,23 @@ AMREX_AMD_ARCH = gfx950</code></pre></li>
 <li><p>If you think you will become a regular contributor, we can provide you with write access to the repository so please ask.</p></li>
 <li><p>You can also fork the repository if you intend to work on your own examples/capabilities that you don’t want to add to the main repository.</p></li>
 <li><p>You can add multiple remote repositories to your local clone using the command:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add <span class="op">&lt;</span>remote name<span class="op">&gt;</span> <span class="op">&lt;</span>remote URL<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add <span class="op">&lt;</span>remote name<span class="op">&gt;</span> <span class="op">&lt;</span>remote URL<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 </ul>
 </section>
 <section id="step-by-step-guide" class="slide level2 smaller">
 <h2>Step-by-step guide</h2>
 <ol type="1">
-<li><p>Start on the <code>develop</code> branch that is up-to-date with the main repository.</p></li>
+<li><p>Start on the <code>main</code> branch that is up-to-date with the main repository.</p></li>
 <li><p>Create a new branch for your new contribution:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch <span class="at">-c</span> enhancement/my_new_contribution</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch <span class="at">-c</span> enhancement/my_new_contribution</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 <li><p>Work on this new branch and commit your changes regularly.</p>
 <ul>
 <li>Make sure the tests pass and you can run an example with your change (if applicable).</li>
 <li>Please update the documentation in the <code>docs</code> folder accordingly.</li>
 </ul></li>
 <li><p>Push your branch to your forked repository or the main repository if you have write access:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> <span class="op">&lt;</span>remote name<span class="op">&gt;</span> enhancement/my_new_contribution</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><p>Open a pull request from your branch to the <code>develop</code> branch of the main repository with a clear description of your changes.</p></li>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> <span class="op">&lt;</span>remote name<span class="op">&gt;</span> enhancement/my_new_contribution</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Open a pull request from your branch to the <code>main</code> branch of the main repository with a clear description of your changes.</p></li>
 </ol>
 </section>
 <section id="code-conventions" class="slide level2 smaller">
@@ -416,9 +413,9 @@ AMREX_AMD_ARCH = gfx950</code></pre></li>
 <ul>
 <li><p>More details in the docs: <a href="https://grtlcollaboration.github.io/GRTeclyn/coding_conventions/">https://grtlcollaboration.github.io/GRTeclyn/coding_conventions/</a></p></li>
 <li><p>Please ensure your code is formatted with <code>clang-format</code>. You can make sure this is done when you commit by setting up pre-commit:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> pip install <span class="at">--user</span> pre-commit</span>
-<span id="cb12-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /path/to/GRTeclyn</span>
-<span id="cb12-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ex">pre-commit</span> install</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> pip install <span class="at">--user</span> pre-commit</span>
+<span id="cb11-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /path/to/GRTeclyn</span>
+<span id="cb11-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ex">pre-commit</span> install</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 <li><p>Variable names should be underscored lower case e.g.&nbsp;<code>my_new_variable</code></p></li>
 <li><p>Function names should start with a verb and be underscored lower case e.g.&nbsp;<code>compute_new_variable()</code>.</p></li>
 <li><p>Class names should be CamelCase e.g.&nbsp;<code>MyNewClass</code>. and member variables should be prefixed with <code>m_</code> e.g.&nbsp;<code>m_my_member_variable</code>.</p></li>
@@ -436,14 +433,14 @@ AMREX_AMD_ARCH = gfx950</code></pre></li>
 <h1>Logistics</h1>
 
 </section>
-<section id="schedule" class="slide level2">
+<section id="schedule" class="slide level2 smaller">
 <h2>Schedule</h2>
 <table class="caption-top">
 <colgroup>
+<col style="width: 20%">
+<col style="width: 29%">
 <col style="width: 21%">
-<col style="width: 30%">
-<col style="width: 19%">
-<col style="width: 28%">
+<col style="width: 27%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -455,45 +452,57 @@ AMREX_AMD_ARCH = gfx950</code></pre></li>
 </thead>
 <tbody>
 <tr class="odd">
-<td>09:00 - 11:00</td>
+<td>09:00 - 10:00</td>
 <td>—</td>
 <td>Hacking</td>
 <td>Hacking</td>
 </tr>
 <tr class="even">
+<td>10:00 - 11:00</td>
+<td>—</td>
+<td>GPU talk (Juliana)</td>
+<td>Hacking</td>
+</tr>
+<tr class="odd">
 <td>11:00 - 11:30</td>
 <td>Welcome and introduction</td>
 <td>Coffee break</td>
 <td>Coffee break</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>11:30 - 12:30</td>
 <td>Hacking</td>
 <td>Hacking</td>
 <td>Round-up and feedback</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>12:30 - 13:30</td>
 <td>Lunch</td>
 <td>Lunch</td>
 <td>Lunch and goodbyes</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>13:30 - 15:00</td>
 <td>Hacking</td>
 <td>Hacking</td>
 <td>—</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>15:00 - 15:30</td>
 <td>Coffee break</td>
 <td>Coffee break</td>
 <td>—</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>15:30 - 17:00</td>
 <td>Hacking</td>
 <td>Hacking</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>Evening</td>
+<td>Dinner (Namaste Village)</td>
+<td>—</td>
 <td>—</td>
 </tr>
 </tbody>
@@ -515,7 +524,7 @@ AMREX_AMD_ARCH = gfx950</code></pre></li>
 <p> </p>
 </div>
 <div class="header-text">
-<p> </p>
+<p>https://tinyurl.com/grteclyn-hackathon-intro</p>
 </div>
 <div class="sb-title">
 <p> </p>
