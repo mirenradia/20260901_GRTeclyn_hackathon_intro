@@ -263,7 +263,7 @@ authors:
 | 13:30 - 15:00     | Hacking                   | Hacking            | —                       |
 | 15:00 - 15:30     | Coffee break              | Coffee break       | —                       |
 | 15:30 - 17:00     | Hacking                   | Hacking            | —                       |
-| Evening           | Dinner (Namaste Village)  | —                  | —                       |
+| 19:00 - 21:30     | Dinner (Namaste Village)  | —                  | —                       |
 
 * Lunch will take place in the Potter Room in Pavilion B.
 * Coffee breaks will take place outside this room.
